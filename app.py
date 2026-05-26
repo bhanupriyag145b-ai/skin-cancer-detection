@@ -1,10 +1,21 @@
 import os
-import numpy as np  # dealing with arrays
-import os  # dealing with directories
-from random import shuffle  # mixing up or currently ordered data that might lead our network astray in training.
-from tqdm import \
-    tqdm  # a nice pretty percentage bar for tasks. Thanks to viewer Daniel BA1/4hler for this suggestion
+import PIL.Image
+if not hasattr(PIL.Image, 'ANTIALIAS'):
+    PIL.Image.ANTIALIAS = PIL.Image.LANCZOS
+import numpy as np
+from random import shuffle
+from tqdm import tqdm
 import tflearn
+from tflearn.layers.conv import conv_2d, max_pool_2d
+from tflearn.layers.core import input_data, dropout, fully_connected
+from tflearn.layers.estimator import regression
+import tensorflow as tf
+import matplotlib.pyplot as plt
+from flask import Flask, render_template, url_for, request
+import sqlite3
+import cv2
+import shutil
+app = Flask(__name__)
 from tflearn.layers.conv import conv_2d, max_pool_2d
 from tflearn.layers.core import input_data, dropout, fully_connected
 from tflearn.layers.estimator import regression
