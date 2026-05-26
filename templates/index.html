@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Disease Detector | Health Diagnosis System</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Bootstrap 3.4.1 (as in your original) -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background: linear-gradient(135deg, #1e5799 0%, #207cca 51%, #2989d8 100%);
+      background-attachment: fixed;
+      color: #fff;
+      min-height: 100vh;
+    }
+    
+    .container {
+      padding: 20px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    .form-panel {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 10px;
+      padding: 30px;
+      margin-top: 30px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      display: none;
+    }
+    
+    .form-panel.active {
+      display: block;
+      animation: fadeIn 0.5s ease;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .form-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 25px;
+      color: #fff;
+      position: relative;
+      padding-bottom: 10px;
+    }
+    
+    .form-title:after {
+      content: '';
+      position: absolute;
+      width: 50px;
+      height: 3px;
+      background: #4CAF50;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    
+    .form-control {
+      background: rgba(255, 255, 255, 0.2);
+      border: none;
+      border-radius: 5px;
+      color: #fff;
+      height: 45px;
+    }
+    
+    .form-control:focus {
+      background: rgba(255, 255, 255, 0.3);
+      color: #fff;
+      box-shadow: none;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+    }
+    
+    .form-control::placeholder {
+      color: rgba(255, 255, 255, 0.7);
+    }
+    
+    .btn-custom {
+      background: #4CAF50;
+      border: none;
+      color: white;
+      padding: 12px 0;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      border-radius: 5px;
+      margin-top: 10px;
+      transition: all 0.3s;
+    }
+    
+    .btn-custom:hover {
+      background: #45a049;
+      transform: translateY(-2px);
+    }
+    
+    .form-footer {
+      text-align: center;
+      margin-top: 20px;
+      color: rgba(255, 255, 255, 0.8);
+    }
+    
+    .form-link {
+      color: #4CAF50;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    
+    .form-link:hover {
+      color: #45a049;
+      text-decoration: none;
+    }
+    
+    .navbar-custom {
+      background: rgba(0, 0, 0, 0.7);
+      border: none;
+      border-radius: 0;
+    }
+    
+    .navbar-brand {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      color: #fff !important;
+    }
+    
+    .navbar-toggle {
+      border: none;
+    }
+    
+    .navbar-toggle .icon-bar {
+      background: #fff;
+    }
+    
+    .nav > li > a {
+      color: rgba(255, 255, 255, 0.8) !important;
+      transition: all 0.3s;
+    }
+    
+    .nav > li > a:hover {
+      color: #fff !important;
+      background: transparent !important;
+    }
+    
+    .alert-custom {
+      background: rgba(255, 193, 7, 0.2);
+      border: 1px solid rgba(255, 193, 7, 0.3);
+      color: #fff;
+    }
+    
+    .input-icon {
+      position: relative;
+    }
+    
+    .input-icon i {
+      position: absolute;
+      left: 15px;
+      top: 15px;
+      color: rgba(255, 255, 255, 0.7);
+    }
+    
+    .input-icon input {
+      padding-left: 40px;
+    }
+    
+    @media (max-width: 768px) {
+      .container {
+        padding: 10px;
+      }
+      
+      .form-panel {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-inverse navbar-custom">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" data-value="#form1" onclick="toggleForm(event)">
+          <i class="fa fa-heartbeat"></i> Disease Detector
+        </a>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+          <li><a data-value="#form1" onclick="toggleForm(event)"><i class="fa fa-home"></i> Home</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a data-value="#form1" onclick="toggleForm(event)"><i class="fa fa-sign-in"></i> Login</a></li>
+          <li><a data-value="#form2" onclick="toggleForm(event)"><i class="fa fa-user-plus"></i> Register</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    {% if msg %}
+    <div class="alert alert-custom alert-dismissible fade in">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <strong><i class="fa fa-exclamation-triangle"></i> Notice:</strong> {{msg}}
+    </div>
+    {% endif %}
+
+    <!-- Login Form -->
+    <div id="form1" class="form-panel active">
+      <h2 class="form-title">USER LOGIN</h2>
+      <form method="post" action="{{ url_for('userlog')}}">
+        <div class="form-group input-icon">
+          <i class="fa fa-user"></i>
+          <input type="text" class="form-control" id="username" placeholder="Username" name="name" required>
+        </div>
+        <div class="form-group input-icon">
+          <i class="fa fa-lock"></i>
+          <input type="password" class="form-control" id="password" placeholder="Password" name="password" required>
+        </div>
+        <button type="submit" class="btn btn-custom btn-block">
+          <i class="fa fa-sign-in"></i> LOGIN
+        </button>
+        <div class="form-footer">
+          Don't have an account? <a class="form-link" data-value="#form2" onclick="toggleForm(event)">Sign up here</a>
+        </div>
+      </form>
+    </div>
+
+    <!-- Registration Form -->
+    <div id="form2" class="form-panel">
+      <h2 class="form-title">REGISTER</h2>
+      <form method="post" action="{{ url_for('userreg')}}">
+        <div class="form-group input-icon">
+          <i class="fa fa-user"></i>
+          <input type="text" class="form-control" id="username" placeholder="Username" name="name" required>
+        </div>
+        <div class="form-group input-icon">
+          <i class="fa fa-envelope"></i>
+          <input type="email" class="form-control" id="email" placeholder="Email" name="email" required>
+        </div>
+        <div class="form-group input-icon">
+          <i class="fa fa-phone"></i>
+          <input type="tel" class="form-control" id="phone" placeholder="Mobile Number" name="phone" required>
+        </div>
+        <div class="form-group input-icon">
+          <i class="fa fa-lock"></i>
+          <input type="password" class="form-control" id="password" placeholder="Password" name="password" required>
+        </div>
+        <button type="submit" class="btn btn-custom btn-block">
+          <i class="fa fa-user-plus"></i> REGISTER
+        </button>
+        <div class="form-footer">
+          Already have an account? <a class="form-link" data-value="#form1" onclick="toggleForm(event)">Sign in here</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- jQuery and Bootstrap JS -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+  <script>
+    function toggleForm(e) {
+      e.preventDefault();
+      var targetForm = $(e.currentTarget.getAttribute('data-value'));
+      
+      // Hide all forms
+      $('.form-panel').removeClass('active');
+      
+      // Show target form
+      targetForm.addClass('active');
+      
+      // Update active nav styling
+      $('.nav a').removeClass('active');
+      $(e.currentTarget).addClass('active');
+    }
+    
+    // Initialize with login form active
+    $(document).ready(function() {
+      $('.nav a[data-value="#form1"]').addClass('active');
+    });
+  </script>
+</body>
+</html>
