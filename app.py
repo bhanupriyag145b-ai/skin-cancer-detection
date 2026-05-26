@@ -16,19 +16,7 @@ import sqlite3
 import cv2
 import shutil
 app = Flask(__name__)
-from tflearn.layers.conv import conv_2d, max_pool_2d
-from tflearn.layers.core import input_data, dropout, fully_connected
-from tflearn.layers.estimator import regression
-import tensorflow as tf
-import matplotlib.pyplot as plt
-from flask import Flask, render_template, url_for, request
-import sqlite3
-import cv2
-import shutil
 
-
-
-app = Flask(__name__)
 
 @app.route('/')
 def index():
@@ -301,7 +289,7 @@ def image():
                             
                             
 
-        return render_template('results.html', status=str_label,accuracy=accuracy,treatment=Tre, treatment1=Tre1,ImageDisplay="http://127.0.0.1:5000/static/images/"+fileName,ImageDisplay1="http://127.0.0.1:5000/static/gray.jpg",ImageDisplay2="http://127.0.0.1:5000/static/edges.jpg",ImageDisplay3="http://127.0.0.1:5000/static/threshold.jpg",ImageDisplay4="http://127.0.0.1:5000/static/sharpened.jpg")
+        return render_template('results.html', status=str_label,accuracy=accuracy,treatment=Tre, treatment1=Tre1,ImageDisplay=/static/images/"+fileName,ImageDisplay1="/static/gray.jpg",ImageDisplay2="/static/edges.jpg",ImageDisplay3="/static/threshold.jpg",ImageDisplay4="/static/sharpened.jpg")
         
     return render_template('index.html')
 
