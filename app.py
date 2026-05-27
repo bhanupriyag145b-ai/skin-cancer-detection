@@ -16,6 +16,11 @@ import sqlite3
 import cv2
 import shutil
 app = Flask(__name__)
+# Initialize database
+conn = __import__("sqlite3").connect("user_data.db")
+conn.execute("CREATE TABLE IF NOT EXISTS user(name TEXT, password TEXT, mobile TEXT, email TEXT)")
+conn.commit()
+conn.close()
 
 
 @app.route('/')
