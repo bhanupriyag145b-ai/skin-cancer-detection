@@ -1,0 +1,2 @@
+echo '[phases.setup]' > nixpacks.toml
+echo 'nixPkgs = ["python310"]' >> nixpacks.toml
