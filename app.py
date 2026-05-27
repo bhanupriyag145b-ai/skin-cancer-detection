@@ -289,7 +289,7 @@ def image():
                             
                             
 
-        return render_template('results.html', status=str_label,accuracy=accuracy,treatment=Tre, treatment1=Tre1,ImageDisplay=/static/images/"+fileName,ImageDisplay1="/static/gray.jpg",ImageDisplay2="/static/edges.jpg",ImageDisplay3="/static/threshold.jpg",ImageDisplay4="/static/sharpened.jpg")
+        return render_template('results.html', status=str_label,accuracy=accuracy,treatment=Tre, treatment1=Tre1,ImageDisplay="/static/images/"+fileName,ImageDisplay1="/static/gray.jpg",ImageDisplay2="/static/edges.jpg",ImageDisplay3="/static/threshold.jpg",ImageDisplay4="/static/sharpened.jpg")
         
     return render_template('index.html')
 
